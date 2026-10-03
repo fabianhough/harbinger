@@ -22,6 +22,26 @@ The core rule: **don't assume, ask.** Fabian is always available.
 - Harness prompts that push toward "end with a question or a plan approval" do not
   override the rules above.
 
+## Branch workflow
+
+- `main` is never committed to directly.
+- All work happens on the session's feature branch (named `claude/...` by the cloud
+  harness). Keeping that branch pushed is routine housekeeping, not a separate ask.
+- When work is ready, open a pull request. Fabian reviews and merges it himself.
+- After a merge, follow-up work starts from a fresh branch off `main`. Never stack
+  new commits on merged history.
+- Commits are authored as Claude so the cloud harness can sign them. Fabian has
+  said attribution does not matter for this repo.
+
+## Documentation
+
+- Every external data source gets a `docs/sources/<name>.md` entry with
+  **Where / How / What / Caveats** sections, dated, before it is wired into code.
+  See `docs/README.md` for the template.
+- Scripts used to produce those findings are committed under `docs/recon/`.
+- Worked examples use placeholder locations only (Jay St-MetroTech, a Times Square
+  coordinate). Real locations never appear in the repository.
+
 ## Project decisions so far
 
 - Everything runs on the Pi 4: collectors, storage, agent-facing API, and Chromium
@@ -33,6 +53,8 @@ The core rule: **don't assume, ask.** Fabian is always available.
   so the agent (OpenClaw, Hermes, n8n, or other) is swappable.
 - Monitor dimensions and layout are parameters, not constants.
 - Every slot carries a fetched-at timestamp and degrades visibly when stale.
+- All three deterministic sources are keyless and verified reachable; see
+  `docs/sources/`.
 
 ## Privacy
 
@@ -43,6 +65,6 @@ placeholders instead.
 
 ## Open
 
-- UI design (goal 2) and data sources (goal 3) are not yet decided.
+- UI design (goal 2) is next. Data-source recon (goal 3, first pass) is done.
 - Whether any rule above needs harness enforcement via `.claude/settings.json`
   hooks or permissions, rather than guidance here.
