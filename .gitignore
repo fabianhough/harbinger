@@ -1,0 +1,12 @@
+# Personal display overrides (config.local.example.js is the committed template)
+web/config.local.js
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+.venv/
+
+# Rendered previews
+*.png

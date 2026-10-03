@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fabianhough/harbinger/schema/state.schema.json",
+  "title": "Harbinger dashboard state",
+  "description": "The single document every pane renders from. See docs/contract.md.",
+  "type": "object",
+  "required": ["generated_at", "slots"],
+  "additionalProperties": false,
+  "properties": {
+    "generated_at": { "$ref": "#/$defs/timestamp" },
+    "slots": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "weather": { "$ref": "#/$defs/weather" },
+        "transit": { "$ref": "#/$defs/transit" },
+        "bikes": { "$ref": "#/$defs/bikes" },
+        "news": { "$ref": "#/$defs/news" },
+        "notices": { "$ref": "#/$defs/notices" }
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 with offset, e.g. 2026-10-03T15:55:00-04:00"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high"],
+      "default": "normal"
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["answer", "detail"],
+      "additionalProperties": false,
+      "properties": {
+        "answer": { "type": "string", "maxLength": 24, "description": "The word at the door: yes, no, light, maybe" },
+        "detail": { "type": "string", "maxLength": 80, "description": "One short line of why" }
+      }
+    },
+    "weather": {
+      "type": "object",
+      "required": ["updated_at", "verdicts", "now", "hourly", "today"],
+      "additionalProperties": false,
+      "properties": {
+        "updated_at": { "$ref": "#/$defs/timestamp" },
+        "source": { "type": "string", "default": "nws" },
+        "verdicts": {
+          "type": "object",
+          "required": ["umbrella", "jacket"],
+          "additionalProperties": false,
+          "properties": {
+            "umbrella": { "$ref": "#/$defs/verdict" },
+            "jacket": { "$ref": "#/$defs/verdict" }
+          }
+        },
+        "now": {
+          "type": "object",
+          "required": ["temp_f", "feels_f", "short"],
+          "additionalProperties": false,
+          "properties": {
+            "temp_f": { "type": "number" },
+            "feels_f": { "type": "number" },
+            "short": { "type": "string", "maxLength": 40 },
+            "wind": { "type": "string", "maxLength": 24 }
+          }
+        },
+        "hourly": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": ["t", "temp_f", "pop", "kind"],
+            "additionalProperties": false,
+            "properties": {
+              "t": { "$ref": "#/$defs/timestamp" },
+              "temp_f": { "type": "number" },
+              "pop": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Probability of precipitation, percent" },
+              "kind": {
+                "type": "string",
+                "enum": ["clear", "cloudy", "fog", "rain", "snow", "storm"],
+                "description": "Collector's classification of the hour; rain, snow and storm are shaded on the strip"
+              },
+              "short": { "type": "string", "maxLength": 40 }
+            }
+          }
+        },
+        "today": {
+          "type": "object",
+          "required": ["high_f", "low_f", "narrative"],
+          "additionalProperties": false,
+          "properties": {
+            "high_f": { "type": "number" },
+            "low_f": { "type": "number" },
+            "narrative": { "type": "string", "maxLength": 240 }
+          }
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["headline", "severity"],
+            "additionalProperties": false,
+            "properties": {
+              "headline": { "type": "string", "maxLength": 120 },
+              "severity": { "type": "string", "enum": ["advisory", "watch", "warning"] },
+              "onset": { "$ref": "#/$defs/timestamp" },
+              "ends": { "$ref": "#/$defs/timestamp" }
+            }
+          }
+        }
+      }
+    },
+    "transit": {
+      "type": "object",
+      "required": ["updated_at", "station", "lines"],
+      "additionalProperties": false,
+      "properties": {
+        "updated_at": { "$ref": "#/$defs/timestamp" },
+        "station": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": { "name": { "type": "string", "maxLength": 40 } }
+        },
+        "directions": {
+          "type": "object",
+          "description": "Station-wide column headers per direction, e.g. Manhattan / Brooklyn. Falls back to the first line's labels.",
+          "required": ["N", "S"],
+          "additionalProperties": false,
+          "properties": {
+            "N": { "type": "string", "maxLength": 24 },
+            "S": { "type": "string", "maxLength": 24 }
+          }
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["route", "directions"],
+            "additionalProperties": false,
+            "properties": {
+              "route": { "type": "string", "pattern": "^[A-Z0-9]{1,2}$", "description": "GTFS route_id, e.g. F, G, R, 6X" },
+              "directions": {
+                "type": "object",
+                "required": ["N", "S"],
+                "additionalProperties": false,
+                "properties": {
+                  "N": { "$ref": "#/$defs/direction" },
+                  "S": { "$ref": "#/$defs/direction" }
+                }
+              },
+              "alerts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["type", "header", "scope"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": { "type": "string", "maxLength": 32, "description": "MTA alert_type, e.g. Delays, Planned Work" },
+                    "header": { "type": "string", "maxLength": 240, "description": "MTA header_text; [F] bracket notation is rendered as a bullet" },
+                    "scope": { "type": "string", "enum": ["line", "station"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "direction": {
+      "type": "object",
+      "required": ["label", "arrivals_min"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "maxLength": 24, "description": "Destination word, e.g. Manhattan" },
+        "arrivals_min": {
+          "type": "array",
+          "maxItems": 3,
+          "items": { "type": "number", "minimum": -2 },
+          "description": "Minutes until arrival, ascending; empty when nothing is scheduled"
+        }
+      }
+    },
+    "bikes": {
+      "type": "object",
+      "required": ["updated_at", "stations"],
+      "additionalProperties": false,
+      "properties": {
+        "updated_at": { "$ref": "#/$defs/timestamp" },
+        "stations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "required": ["role", "name", "classic", "ebike", "docks", "renting", "reported_at"],
+            "additionalProperties": false,
+            "properties": {
+              "role": { "type": "string", "enum": ["origin", "destination"] },
+              "name": { "type": "string", "maxLength": 40 },
+              "classic": { "type": "integer", "minimum": 0 },
+              "ebike": { "type": "integer", "minimum": 0 },
+              "docks": { "type": "integer", "minimum": 0 },
+              "renting": { "type": "boolean" },
+              "reported_at": { "$ref": "#/$defs/timestamp" }
+            }
+          }
+        }
+      }
+    },
+    "news": {
+      "type": "object",
+      "required": ["updated_at", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "updated_at": { "$ref": "#/$defs/timestamp" },
+        "items": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": ["title", "summary", "source"],
+            "additionalProperties": false,
+            "properties": {
+              "title": { "type": "string", "maxLength": 90 },
+              "summary": { "type": "string", "maxLength": 200 },
+              "source": { "type": "string", "maxLength": 40 },
+              "published_at": { "$ref": "#/$defs/timestamp" },
+              "priority": { "$ref": "#/$defs/priority" }
+            }
+          }
+        }
+      }
+    },
+    "notices": {
+      "type": "object",
+      "required": ["updated_at", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "updated_at": { "$ref": "#/$defs/timestamp" },
+        "text": {
+          "type": "string",
+          "maxLength": 1200,
+          "description": "Plain text. Newlines are kept. **bold** is the only markup."
+        },
+        "headline": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "One line shown large at the top of the agent column. Omit on quiet days."
+        },
+        "priority": { "$ref": "#/$defs/priority" }
+      }
+    }
+  }
+}
