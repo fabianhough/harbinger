@@ -1,8 +1,6 @@
 # docs/
 
-Provenance for everything Harbinger depends on that it does not control. The
-development container is ephemeral and sessions do not share memory, so anything
-learned about an external feed is written here or it is lost.
+Provenance for everything Harbinger depends on that it does not control.
 
 ## Layout
 

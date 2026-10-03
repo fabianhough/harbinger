@@ -41,6 +41,9 @@ The core rule: **don't assume, ask.** Fabian is always available.
 - Scripts used to produce those findings are committed under `docs/recon/`.
 - Worked examples use placeholder locations only (Jay St-MetroTech, a Times Square
   coordinate). Real locations never appear in the repository.
+- Repository content (docs, code, comments, commit messages) describes Harbinger.
+  Reasons that are about the development environment, the cloud session, or how
+  Claude works belong in this file only.
 
 ## Project decisions so far
 
