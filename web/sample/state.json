@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-10-03T15:55:00-04:00",
+  "slots": {
+    "weather": {
+      "updated_at": "2026-10-03T15:53:56-04:00",
+      "source": "nws",
+      "verdicts": {
+        "umbrella": { "answer": "No", "detail": "0% chance of rain through midnight" },
+        "jacket": { "answer": "Light", "detail": "57° tonight, feels like 52° after 10pm" }
+      },
+      "now": { "temp_f": 71, "feels_f": 65, "short": "Sunny", "wind": "8 mph NE" },
+      "hourly": [
+        { "t": "2026-10-03T15:00:00-04:00", "temp_f": 71, "pop": 0, "short": "Sunny" },
+        { "t": "2026-10-03T16:00:00-04:00", "temp_f": 70, "pop": 0, "short": "Mostly Sunny" },
+        { "t": "2026-10-03T17:00:00-04:00", "temp_f": 69, "pop": 0, "short": "Mostly Sunny" },
+        { "t": "2026-10-03T18:00:00-04:00", "temp_f": 67, "pop": 0, "short": "Partly Cloudy" },
+        { "t": "2026-10-03T19:00:00-04:00", "temp_f": 65, "pop": 1, "short": "Partly Cloudy" },
+        { "t": "2026-10-03T20:00:00-04:00", "temp_f": 63, "pop": 1, "short": "Partly Cloudy" },
+        { "t": "2026-10-03T21:00:00-04:00", "temp_f": 61, "pop": 1, "short": "Partly Cloudy" },
+        { "t": "2026-10-03T22:00:00-04:00", "temp_f": 60, "pop": 1, "short": "Partly Cloudy" },
+        { "t": "2026-10-03T23:00:00-04:00", "temp_f": 59, "pop": 2, "short": "Partly Cloudy" },
+        { "t": "2026-10-04T00:00:00-04:00", "temp_f": 58, "pop": 3, "short": "Partly Cloudy" },
+        { "t": "2026-10-04T01:00:00-04:00", "temp_f": 58, "pop": 5, "short": "Mostly Cloudy" },
+        { "t": "2026-10-04T02:00:00-04:00", "temp_f": 57, "pop": 6, "short": "Mostly Cloudy" }
+      ],
+      "today": {
+        "high_f": 71,
+        "low_f": 57,
+        "narrative": "Mostly sunny, high near 71, falling to around 69 this afternoon. Partly cloudy tonight, low around 57. Northeast wind around 8 mph."
+      },
+      "alerts": []
+    },
+    "transit": {
+      "updated_at": "2026-10-03T15:54:05-04:00",
+      "station": { "name": "Jay St-MetroTech" },
+      "lines": [
+        {
+          "route": "F",
+          "directions": {
+            "N": { "label": "Manhattan", "arrivals_min": [0.8, 10.8, 19.3] },
+            "S": { "label": "Brooklyn", "arrivals_min": [0.8, 9.3, 17.3] }
+          },
+          "alerts": [
+            {
+              "type": "Delays",
+              "header": "Downtown [E][F] trains are running with delays while we perform track maintenance along the line in Queens.",
+              "scope": "line"
+            }
+          ]
+        },
+        {
+          "route": "A",
+          "directions": {
+            "N": { "label": "Manhattan", "arrivals_min": [10.4, 14.8, 27.9] },
+            "S": { "label": "Brooklyn", "arrivals_min": [3.2, 11.5, 19.4] }
+          },
+          "alerts": [
+            {
+              "type": "Planned Work",
+              "header": "Manhattan-bound [A] trains skip Jay St-MetroTech tonight from 9:45 PM for station work.",
+              "scope": "station"
+            }
+          ]
+        },
+        {
+          "route": "R",
+          "directions": {
+            "N": { "label": "Manhattan", "arrivals_min": [9.4, 28.0, 45.5] },
+            "S": { "label": "Bay Ridge", "arrivals_min": [1.2, 8.4, 15.9] }
+          },
+          "alerts": [
+            {
+              "type": "Delays",
+              "header": "Downtown [R] trains are running with delays after we moved a train that had its brakes activated near Forest Hills-71 Av.",
+              "scope": "line"
+            }
+          ]
+        }
+      ]
+    },
+    "bikes": {
+      "updated_at": "2026-10-03T15:53:47-04:00",
+      "stations": [
+        { "role": "origin", "name": "Broadway & W 48 St", "classic": 3, "ebike": 2, "docks": 94, "renting": true, "reported_at": "2026-10-03T15:53:11-04:00" },
+        { "role": "origin", "name": "6 Ave & W 45 St", "classic": 5, "ebike": 11, "docks": 49, "renting": true, "reported_at": "2026-10-03T15:52:48-04:00" },
+        { "role": "destination", "name": "Broadway & W 41 St", "classic": 2, "ebike": 10, "docks": 37, "renting": true, "reported_at": "2026-10-03T15:53:10-04:00" }
+      ]
+    },
+    "news": {
+      "updated_at": "2026-10-03T07:10:00-04:00",
+      "items": [
+        {
+          "title": "Kubernetes 1.35 ships with in-place pod resize on by default",
+          "summary": "Vertical scaling without a restart graduates to stable. Worth checking the homelab cluster's feature gates before the next upgrade.",
+          "source": "kubernetes.io",
+          "published_at": "2026-10-02T14:00:00-04:00",
+          "priority": "normal"
+        },
+        {
+          "title": "MTA board approves 2027 capital plan amendments",
+          "summary": "Signal modernization on the Crosstown line moves up two years. Weekend service changes expected through 2028.",
+          "source": "Gothamist",
+          "published_at": "2026-10-02T18:30:00-04:00",
+          "priority": "high"
+        },
+        {
+          "title": "Raspberry Pi OS October release drops 32-bit kiosk images",
+          "summary": "64-bit only from this release. Chromium kiosk mode gains a flag for scheduled page reloads.",
+          "source": "raspberrypi.com",
+          "published_at": "2026-10-03T06:00:00-04:00",
+          "priority": "normal"
+        },
+        {
+          "title": "NYC DOT expands protected bike lane on Flatbush Ave",
+          "summary": "Construction begins mid-October between Atlantic Ave and Grand Army Plaza. Expect lane closures on weekday mornings.",
+          "source": "Streetsblog",
+          "published_at": "2026-10-02T09:15:00-04:00",
+          "priority": "low"
+        }
+      ]
+    },
+    "notices": {
+      "updated_at": "2026-10-03T06:30:00-04:00",
+      "priority": "normal",
+      "text": "**Homelab**\nproxmox-01 up 41 days, 2 VMs paused\nNAS at 71% capacity\nBackup job completed 03:12\n\n**Friends**\nMinecraft server: offline since Thursday\n\n**Today**\nTrash and recycling go out tonight\nPackage expected by 8pm"
+    }
+  }
+}
