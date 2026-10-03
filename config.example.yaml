@@ -1,0 +1,18 @@
+# Copy to config.yaml (gitignored) and fill in. Paths are relative to this file.
+
+server:
+  host: 0.0.0.0
+  port: 8080
+
+agent:
+  # Bearer token the agent presents on PUT /api/slots/*. HARBINGER_AGENT_TOKEN
+  # in the environment overrides this. Writes are refused until one is set.
+  token: change-me
+  writable_slots: [news, notices]
+
+state:
+  # Where the current state document is snapshotted after every write.
+  snapshot: var/state.json
+
+web:
+  dir: web

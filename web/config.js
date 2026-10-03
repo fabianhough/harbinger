@@ -6,14 +6,13 @@ window.HARBINGER_CONFIG = {
   // monitor is mostly a matter of changing these and the layout weights below.
   viewport: { width: 2560, height: 1080 },
 
-  // Where the page polls for state. The static mock reads its sample file; the
-  // server will expose /api/state.
-  stateUrl: "sample/state.json",
+  // Where the page polls for state. mock.html overrides this to read the sample.
+  stateUrl: "/api/state",
   pollMs: 30000,
 
   // "live" uses the wall clock. "frozen" pins the clock to state.generated_at so
   // a sample document reads sensibly when reviewing the mock.
-  clock: "frozen",
+  clock: "live",
 
   // Full page reload once a day at this local time (kiosk hygiene). null disables.
   reloadAt: "04:00",
