@@ -4,6 +4,9 @@ Last verified: 2026-10-03
 
 ## Where
 
+Used by `harbinger/collectors/citibike.py`. `uv run harbinger stations <name>` or
+`--near LAT,LON` looks up station IDs for the config.
+
 - Discovery: `https://gbfs.citibikenyc.com/gbfs/gbfs.json` (GBFS 1.1). It points at
   Lyft-hosted feeds under `https://gbfs.lyft.com/gbfs/1.1/bkn/en/`.
 - GBFS 2.3 is also published: `https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json`.

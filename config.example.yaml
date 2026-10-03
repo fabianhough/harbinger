@@ -1,4 +1,5 @@
 # Copy to config.yaml (gitignored) and fill in. Paths are relative to this file.
+# Locations below are placeholders: Jay St-MetroTech and the Times Square area.
 
 server:
   host: 0.0.0.0
@@ -16,3 +17,33 @@ state:
 
 web:
   dir: web
+
+# Remove a section below to disable that collector.
+
+bikes:
+  # Station IDs from `uv run harbinger stations "<name>"` or `--near LAT,LON`.
+  origins:
+    - 64f0f28c-bedc-42d5-b107-ecdd48fc30cd   # Broadway & W 48 St
+    - 904930bd-2671-4695-9c1a-8a894b041129   # 6 Ave & W 45 St
+  destinations:
+    - 66dc292c-0aca-11e7-82f6-3863bb44ef7c   # Broadway & W 41 St
+    - 66dca682-0aca-11e7-82f6-3863bb44ef7c   # W 45 St & 8 Ave
+
+weather:
+  lat: 40.7580
+  lon: -73.9855
+  # NWS requires a User-Agent that identifies the application.
+  user_agent: "harbinger (https://github.com/fabianhough/harbinger)"
+  # Feels-like temperature (°F) below which the jacket verdict becomes
+  # Heavy / Yes / Light. At or above the last value: No.
+  jacket_thresholds_f: [40, 55, 68]
+
+transit:
+  station_name: Jay St-MetroTech
+  # Column headers for the two platform directions.
+  directions: { N: Manhattan, S: Brooklyn }
+  # Parent stop IDs from the MTA static GTFS stops.txt (see docs/sources/mta-subway.md).
+  lines:
+    - { route: F, stop: A41 }
+    - { route: A, stop: A41 }
+    - { route: R, stop: R29, labels: { S: Bay Ridge } }

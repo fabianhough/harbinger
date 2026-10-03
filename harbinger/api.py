@@ -2,18 +2,41 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
 import secrets
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from .collectors import build_collectors, make_client, run_collector
 from .config import Config
 from .state import SlotValidationError, StateStore
 
+log = logging.getLogger("harbinger.api")
+
 
 def create_app(config: Config, store: StateStore) -> FastAPI:
-    app = FastAPI(title="Harbinger", docs_url=None, redoc_url=None)
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        collectors = build_collectors(config)
+        tasks: list[asyncio.Task] = []
+        client = make_client() if collectors else None
+        for c in collectors:
+            tasks.append(asyncio.create_task(run_collector(c, store, client), name=f"collector:{c.name}"))
+            log.info("collector %s -> slot %s every %ss", c.name, c.slot, c.interval_s)
+        try:
+            yield
+        finally:
+            for t in tasks:
+                t.cancel()
+            await asyncio.gather(*tasks, return_exceptions=True)
+            if client:
+                await client.aclose()
+
+    app = FastAPI(title="Harbinger", docs_url=None, redoc_url=None, lifespan=lifespan)
 
     @app.get("/api/health")
     def health() -> dict:

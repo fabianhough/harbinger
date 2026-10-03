@@ -49,9 +49,15 @@ def main() -> int:
     ap.add_argument("--width", type=int, default=2560)
     ap.add_argument("--height", type=int, default=1080)
     ap.add_argument("--page", default="mock.html")
+    ap.add_argument("--url", help="render a running server (e.g. http://127.0.0.1:8080/) instead of the static directory")
     args = ap.parse_args()
 
-    server, port = serve(WEB)
+    server = None
+    if args.url:
+        url = args.url
+    else:
+        server, port = serve(WEB)
+        url = f"http://127.0.0.1:{port}/{args.page}"
     try:
         with sync_playwright() as p:
             launch = {"executable_path": CHROMIUM} if CHROMIUM else {}
@@ -62,16 +68,17 @@ def main() -> int:
             # config.local.js is optional, so its 404 is expected.
             page.on("console", lambda m: errors.append(m.text)
                     if m.type == "error" and "config.local.js" not in (m.location or {}).get("url", "") else None)
-            page.goto(f"http://127.0.0.1:{port}/{args.page}")
+            page.goto(url)
             page.wait_for_selector(".pane", timeout=10000)
             page.evaluate("document.fonts.ready")
-            page.wait_for_timeout(300)
+            page.wait_for_timeout(1500 if args.url else 300)
 
             sw, sh = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.scrollHeight]")
             page.screenshot(path=args.out, full_page=False)
             browser.close()
     finally:
-        server.shutdown()
+        if server:
+            server.shutdown()
 
     print(f"wrote {args.out} ({args.width}x{args.height}); document {sw}x{sh}")
     ok = True

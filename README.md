@@ -15,9 +15,17 @@ cp config.example.yaml config.yaml      # set the agent token
 uv run harbinger serve --seed web/sample/state.json
 ```
 
-Then open http://localhost:8080. The `--seed` fills the state with the sample document
-on first run; without it every pane waits for data. The current state is snapshotted
-to `var/state.json` after every write and restored on restart.
+Then open http://localhost:8080. The collectors configured in `config.yaml` (Citi
+Bike, NWS weather, MTA subway) start with the server and fill their panes within a
+minute; `--seed` fills the state with the sample document first so nothing waits.
+The current state is snapshotted to `var/state.json` after every write and restored
+on restart.
+
+```sh
+uv run harbinger collect nws                   # run one collector once, print its slot
+uv run harbinger stations "Broadway & W 48"    # find Citi Bike station IDs by name
+uv run harbinger stations --near 40.758,-73.9855
+```
 
 ## Agent writes
 

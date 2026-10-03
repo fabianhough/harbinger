@@ -1,0 +1,40 @@
+{
+  "last_updated": 1791063945,
+  "ttl": 60,
+  "data": {
+    "stations": [
+      {
+        "station_id": "66dc292c-0aca-11e7-82f6-3863bb44ef7c",
+        "name": "Broadway & W 41 St",
+        "short_name": "6560.01",
+        "lat": 40.75513557,
+        "lon": -73.98658032,
+        "capacity": 55
+      },
+      {
+        "station_id": "64f0f28c-bedc-42d5-b107-ecdd48fc30cd",
+        "name": "Broadway & W 48 St",
+        "short_name": "6708.04",
+        "lat": 40.76017739537783,
+        "lon": -73.98486793041229,
+        "capacity": 103
+      },
+      {
+        "station_id": "66dca682-0aca-11e7-82f6-3863bb44ef7c",
+        "name": "W 45 St & 8 Ave",
+        "short_name": "6676.02",
+        "lat": 40.75929124,
+        "lon": -73.98859651,
+        "capacity": 65
+      },
+      {
+        "station_id": "904930bd-2671-4695-9c1a-8a894b041129",
+        "name": "6 Ave & W 45 St",
+        "short_name": "6593.15",
+        "lat": 40.756951,
+        "lon": -73.982631,
+        "capacity": 67
+      }
+    ]
+  }
+}
