@@ -4,6 +4,8 @@ Last verified: 2026-10-03
 
 ## Where
 
+Used by `harbinger/collectors/nws.py`.
+
 - Base: `https://api.weather.gov`
 - Documentation: https://www.weather.gov/documentation/services-web-api
   (OpenAPI spec and FAQ on the same page)
@@ -21,6 +23,7 @@ Three endpoints matter:
 | `/gridpoints/{office}/{x},{y}/forecast/hourly` | Hourly periods, 7 days | 3600 s |
 | `/gridpoints/{office}/{x},{y}/forecast` | Twice-daily narrative periods ("This Afternoon", "Tonight") | 3600 s |
 | `/gridpoints/{office}/{x},{y}` | Raw gridded layers, including apparent temperature | 3600 s |
+| `/alerts/active?point={lat},{lon}` | Active watches, warnings and advisories for a point | 30 s |
 
 ## How
 
