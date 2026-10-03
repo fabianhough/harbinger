@@ -75,7 +75,9 @@ placeholders instead.
 - The page (`web/`), its contract (`schema/`, `docs/contract.md`), the server
   (`harbinger/`, FastAPI) and the three collectors (`harbinger/collectors/`) exist.
   `uv run harbinger serve` runs everything; `uv run harbinger collect <name>` runs
-  one collector for debugging; `uv run pytest`. Next: Pi deployment (systemd units
-  for the server and kiosk Chromium, local config, first-run notes).
+  one collector for debugging; `uv run pytest`. Next: repo cleanup and generic
+  deployment tooling. Harbinger runs anywhere with Python, a browser, internet
+  access and a reachable port; nothing is Pi-specific, and no host setup belongs
+  in this repository.
 - Whether any rule above needs harness enforcement via `.claude/settings.json`
   hooks or permissions, rather than guidance here.
