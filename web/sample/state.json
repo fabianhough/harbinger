@@ -46,6 +46,7 @@
     "transit": {
       "updated_at": "2026-10-03T15:54:05-04:00",
       "station": { "name": "Jay St-MetroTech" },
+      "directions": { "N": "Manhattan", "S": "Brooklyn" },
       "lines": [
         {
           "route": "F",
@@ -130,6 +131,20 @@
           "source": "Streetsblog",
           "published_at": "2026-10-02T09:15:00-04:00",
           "priority": "low"
+        },
+        {
+          "title": "Proxmox VE 9.2 adds built-in VM snapshot scheduling",
+          "summary": "Scheduled snapshots with retention policies land in the web UI, no cron needed. Backup server integration unchanged.",
+          "source": "proxmox.com",
+          "published_at": "2026-10-02T11:00:00-04:00",
+          "priority": "normal"
+        },
+        {
+          "title": "Citi Bike to add 40 stations in south Brooklyn by spring",
+          "summary": "Expansion focuses on Sunset Park and Bay Ridge. E-bike share of the fleet expected to pass 50 percent.",
+          "source": "Brooklyn Paper",
+          "published_at": "2026-10-01T16:40:00-04:00",
+          "priority": "normal"
         }
       ]
     },

@@ -193,6 +193,13 @@
     if (!t) return missingPane("transit", "Trains");
     const major = C.emphasizedDirection;
     const minor = major === "N" ? "S" : "N";
+    const header = (dir) => t.directions?.[dir] ?? t.lines[0]?.directions[dir]?.label ?? "";
+    const head = `
+      <div class="board-head">
+        <span></span>
+        <span class="label">To ${esc(header(major))}</span>
+        <span class="label">To ${esc(header(minor))}</span>
+      </div>`;
     const lines = t.lines.map((l) => {
       const alerts = (l.alerts ?? []).map((a) => `
         <div class="line-alert">
@@ -202,26 +209,28 @@
       return `
         <div class="line">
           ${bullet(l.route, "lg")}
-          ${dirBlock(l.directions[major], "major")}
-          ${dirBlock(l.directions[minor], "minor")}
+          ${dirBlock(l.directions[major], "major", header(major))}
+          ${dirBlock(l.directions[minor], "minor", header(minor))}
           ${alerts ? `<div class="line-alerts">${alerts}</div>` : ""}
         </div>`;
     }).join("");
-    return paneShell("transit", t.station.name, `<div class="lines">${lines}</div>`, t.updated_at);
+    return paneShell("transit", t.station.name, head + `<div class="lines">${lines}</div>`, t.updated_at);
   }
 
-  function dirBlock(d, kind) {
+  function dirBlock(d, kind, header) {
     // Trains arriving sooner than the walk to the station are not reachable.
     const reachable = (d?.arrivals_min ?? []).filter((m) => m >= C.walkMinutes).slice(0, 3);
     const nums = reachable.length
       ? `<span class="first num">${Math.round(reachable[0])}</span>` +
-        reachable.slice(1).map((m) => `<span class="rest num">${Math.round(m)}</span>`).join("") +
+        reachable.slice(1).map((m) => `<span class="sep">·</span><span class="rest num">${Math.round(m)}</span>`).join("") +
         `<span class="unit">min</span>`
       : `<span class="none">none in reach</span>`;
+    // A line whose terminal differs from the column header names it beneath the number.
+    const dest = d?.label && d.label !== header ? `<span class="dest">${esc(d.label)}</span>` : "";
     return `
       <div class="dir ${kind}">
-        <span class="label">${esc(d?.label ?? "")}</span>
         <div class="arrivals">${nums}</div>
+        ${dest}
       </div>`;
   }
 
@@ -232,8 +241,8 @@
     const stations = b.stations.map((s) => {
       const origin = s.role === "origin";
       const counts = origin
-        ? `${count("classic", s.classic)}${count("e-bike", s.ebike)}${count("docks", s.docks, "minor")}`
-        : `${count("docks", s.docks)}${count("classic", s.classic, "minor")}${count("e-bike", s.ebike, "minor")}`;
+        ? `${count("e-bike", s.ebike)}${count("classic", s.classic)}${count("docks", s.docks, "minor")}`
+        : `${count("docks", s.docks)}${count("e-bike", s.ebike, "minor")}${count("classic", s.classic, "minor")}`;
       return `
         <div class="station ${s.renting ? "" : "closed"}">
           <span class="label">${origin ? "from" : "to"}</span>

@@ -126,6 +126,16 @@
           "additionalProperties": false,
           "properties": { "name": { "type": "string", "maxLength": 40 } }
         },
+        "directions": {
+          "type": "object",
+          "description": "Station-wide column headers per direction, e.g. Manhattan / Brooklyn. Falls back to the first line's labels.",
+          "required": ["N", "S"],
+          "additionalProperties": false,
+          "properties": {
+            "N": { "type": "string", "maxLength": 24 },
+            "S": { "type": "string", "maxLength": 24 }
+          }
+        },
         "lines": {
           "type": "array",
           "minItems": 1,
@@ -212,7 +222,7 @@
         "updated_at": { "$ref": "#/$defs/timestamp" },
         "items": {
           "type": "array",
-          "maxItems": 8,
+          "maxItems": 10,
           "items": {
             "type": "object",
             "required": ["title", "summary", "source"],
