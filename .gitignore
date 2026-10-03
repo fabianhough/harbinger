@@ -1,7 +1,7 @@
 # Personal display overrides (config.local.example.js is the committed template)
 web/config.local.js
 
-# Server config and secrets (config.example.yaml is the committed template)
+# Server config and secrets (config.example.yaml and .env.example are the templates)
 config.yaml
 .env
 
@@ -11,6 +11,7 @@ var/
 # Python
 __pycache__/
 .venv/
+.pytest_cache/
 *.egg-info/
 
 # Rendered previews

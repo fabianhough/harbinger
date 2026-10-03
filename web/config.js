@@ -26,6 +26,10 @@ window.HARBINGER_CONFIG = {
   // How many hours the weather strip covers, starting from the current hour.
   hourlyHours: 18,
 
+  // When the news list is taller than its pane it scrolls: pause at the top, step
+  // one item at a time, pause at the bottom, return to the top.
+  newsScroll: { stepMs: 7000, pauseMs: 12000 },
+
   // Seconds after updated_at at which a pane is "stale"; 3x this is "dead".
   freshnessSeconds: {
     weather: 7200,
