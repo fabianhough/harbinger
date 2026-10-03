@@ -69,8 +69,10 @@ placeholders instead.
 ## Open
 
 - The state contract (`schema/`, `docs/contract.md`) and a static mock (`web/`)
-  exist. `uv run tools/screenshot.py` renders the mock at kiosk resolution and
-  fails on overflow. The server leg (collectors, state endpoint, agent write
-  endpoint) is next, once the mock has been reviewed.
+  exist, at revision 2: measured panes on the left two thirds (band, hourly
+  weather strip, transit, bikes), agent panes on the right third (headline,
+  notices, news). `uv run tools/screenshot.py` renders the mock at kiosk
+  resolution and fails on overflow. The server leg (collectors, state endpoint,
+  agent write endpoint) is next, once the mock has been reviewed.
 - Whether any rule above needs harness enforcement via `.claude/settings.json`
   hooks or permissions, rather than guidance here.

@@ -5,30 +5,43 @@
       "updated_at": "2026-10-03T15:53:56-04:00",
       "source": "nws",
       "verdicts": {
-        "umbrella": { "answer": "No", "detail": "0% chance of rain through midnight" },
+        "umbrella": { "answer": "10pm to 1am", "detail": "Showers likely, 65% at 11pm" },
         "jacket": { "answer": "Light", "detail": "57° tonight, feels like 52° after 10pm" }
       },
       "now": { "temp_f": 71, "feels_f": 65, "short": "Sunny", "wind": "8 mph NE" },
       "hourly": [
-        { "t": "2026-10-03T15:00:00-04:00", "temp_f": 71, "pop": 0, "short": "Sunny" },
-        { "t": "2026-10-03T16:00:00-04:00", "temp_f": 70, "pop": 0, "short": "Mostly Sunny" },
-        { "t": "2026-10-03T17:00:00-04:00", "temp_f": 69, "pop": 0, "short": "Mostly Sunny" },
-        { "t": "2026-10-03T18:00:00-04:00", "temp_f": 67, "pop": 0, "short": "Partly Cloudy" },
-        { "t": "2026-10-03T19:00:00-04:00", "temp_f": 65, "pop": 1, "short": "Partly Cloudy" },
-        { "t": "2026-10-03T20:00:00-04:00", "temp_f": 63, "pop": 1, "short": "Partly Cloudy" },
-        { "t": "2026-10-03T21:00:00-04:00", "temp_f": 61, "pop": 1, "short": "Partly Cloudy" },
-        { "t": "2026-10-03T22:00:00-04:00", "temp_f": 60, "pop": 1, "short": "Partly Cloudy" },
-        { "t": "2026-10-03T23:00:00-04:00", "temp_f": 59, "pop": 2, "short": "Partly Cloudy" },
-        { "t": "2026-10-04T00:00:00-04:00", "temp_f": 58, "pop": 3, "short": "Partly Cloudy" },
-        { "t": "2026-10-04T01:00:00-04:00", "temp_f": 58, "pop": 5, "short": "Mostly Cloudy" },
-        { "t": "2026-10-04T02:00:00-04:00", "temp_f": 57, "pop": 6, "short": "Mostly Cloudy" }
+        { "t": "2026-10-03T15:00:00-04:00", "temp_f": 71, "pop": 0,  "kind": "clear",  "short": "Sunny" },
+        { "t": "2026-10-03T16:00:00-04:00", "temp_f": 70, "pop": 0,  "kind": "clear",  "short": "Mostly Sunny" },
+        { "t": "2026-10-03T17:00:00-04:00", "temp_f": 69, "pop": 0,  "kind": "clear",  "short": "Mostly Sunny" },
+        { "t": "2026-10-03T18:00:00-04:00", "temp_f": 67, "pop": 5,  "kind": "cloudy", "short": "Partly Cloudy" },
+        { "t": "2026-10-03T19:00:00-04:00", "temp_f": 65, "pop": 10, "kind": "cloudy", "short": "Partly Cloudy" },
+        { "t": "2026-10-03T20:00:00-04:00", "temp_f": 63, "pop": 20, "kind": "cloudy", "short": "Mostly Cloudy" },
+        { "t": "2026-10-03T21:00:00-04:00", "temp_f": 61, "pop": 30, "kind": "cloudy", "short": "Mostly Cloudy" },
+        { "t": "2026-10-03T22:00:00-04:00", "temp_f": 60, "pop": 55, "kind": "rain",   "short": "Showers Likely" },
+        { "t": "2026-10-03T23:00:00-04:00", "temp_f": 59, "pop": 65, "kind": "rain",   "short": "Showers" },
+        { "t": "2026-10-04T00:00:00-04:00", "temp_f": 58, "pop": 60, "kind": "rain",   "short": "Showers" },
+        { "t": "2026-10-04T01:00:00-04:00", "temp_f": 58, "pop": 40, "kind": "rain",   "short": "Chance Showers" },
+        { "t": "2026-10-04T02:00:00-04:00", "temp_f": 57, "pop": 20, "kind": "cloudy", "short": "Mostly Cloudy" },
+        { "t": "2026-10-04T03:00:00-04:00", "temp_f": 56, "pop": 10, "kind": "cloudy", "short": "Mostly Cloudy" },
+        { "t": "2026-10-04T04:00:00-04:00", "temp_f": 56, "pop": 5,  "kind": "cloudy", "short": "Partly Cloudy" },
+        { "t": "2026-10-04T05:00:00-04:00", "temp_f": 55, "pop": 5,  "kind": "cloudy", "short": "Partly Cloudy" },
+        { "t": "2026-10-04T06:00:00-04:00", "temp_f": 55, "pop": 5,  "kind": "cloudy", "short": "Partly Cloudy" },
+        { "t": "2026-10-04T07:00:00-04:00", "temp_f": 56, "pop": 0,  "kind": "clear",  "short": "Sunny" },
+        { "t": "2026-10-04T08:00:00-04:00", "temp_f": 58, "pop": 0,  "kind": "clear",  "short": "Sunny" }
       ],
       "today": {
         "high_f": 71,
-        "low_f": 57,
-        "narrative": "Mostly sunny, high near 71, falling to around 69 this afternoon. Partly cloudy tonight, low around 57. Northeast wind around 8 mph."
+        "low_f": 55,
+        "narrative": "Mostly sunny, high near 71. Showers likely after 10pm, low around 55. Northeast wind around 8 mph."
       },
-      "alerts": []
+      "alerts": [
+        {
+          "headline": "Wind Advisory until 10 PM",
+          "severity": "advisory",
+          "onset": "2026-10-03T18:00:00-04:00",
+          "ends": "2026-10-03T22:00:00-04:00"
+        }
+      ]
     },
     "transit": {
       "updated_at": "2026-10-03T15:54:05-04:00",
@@ -83,7 +96,8 @@
       "stations": [
         { "role": "origin", "name": "Broadway & W 48 St", "classic": 3, "ebike": 2, "docks": 94, "renting": true, "reported_at": "2026-10-03T15:53:11-04:00" },
         { "role": "origin", "name": "6 Ave & W 45 St", "classic": 5, "ebike": 11, "docks": 49, "renting": true, "reported_at": "2026-10-03T15:52:48-04:00" },
-        { "role": "destination", "name": "Broadway & W 41 St", "classic": 2, "ebike": 10, "docks": 37, "renting": true, "reported_at": "2026-10-03T15:53:10-04:00" }
+        { "role": "destination", "name": "Broadway & W 41 St", "classic": 2, "ebike": 10, "docks": 37, "renting": true, "reported_at": "2026-10-03T15:53:10-04:00" },
+        { "role": "destination", "name": "W 45 St & 8 Ave", "classic": 1, "ebike": 0, "docks": 58, "renting": true, "reported_at": "2026-10-03T15:52:59-04:00" }
       ]
     },
     "news": {
@@ -120,9 +134,10 @@
       ]
     },
     "notices": {
-      "updated_at": "2026-10-03T06:30:00-04:00",
+      "updated_at": "2026-10-03T14:05:00-04:00",
       "priority": "normal",
-      "text": "**Homelab**\nproxmox-01 up 41 days, 2 VMs paused\nNAS at 71% capacity\nBackup job completed 03:12\n\n**Friends**\nMinecraft server: offline since Thursday\n\n**Today**\nTrash and recycling go out tonight\nPackage expected by 8pm"
+      "headline": "Minecraft server is back online",
+      "text": "**Homelab**\nproxmox-01 up 41 days, 2 VMs paused\nNAS at 71% capacity\nBackup job completed 03:12\n\n**Friends**\nMinecraft server back online as of 2pm, down since Thursday\n\n**Today**\nTrash and recycling go out tonight\nPackage expected by 8pm"
     }
   }
 }

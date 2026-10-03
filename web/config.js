@@ -1,8 +1,9 @@
 // Display policy for the dashboard page. Nothing in this file is location-specific;
 // station names, coordinates and IDs arrive in the state document from the server.
+// Personal overrides go in config.local.js (gitignored); see config.local.example.js.
 window.HARBINGER_CONFIG = {
   // Target panel. The type scale is derived from viewport height, so a different
-  // monitor is mostly a matter of changing these and the column weights below.
+  // monitor is mostly a matter of changing these and the layout weights below.
   viewport: { width: 2560, height: 1080 },
 
   // Where the page polls for state. The static mock reads its sample file; the
@@ -20,6 +21,12 @@ window.HARBINGER_CONFIG = {
   // Which transit direction gets the large treatment.
   emphasizedDirection: "N",
 
+  // Trains arriving sooner than this cannot be reached on foot and are not shown.
+  walkMinutes: 10,
+
+  // How many hours the weather strip covers, starting from the current hour.
+  hourlyHours: 18,
+
   // Seconds after updated_at at which a pane is "stale"; 3x this is "dead".
   freshnessSeconds: {
     weather: 7200,
@@ -30,9 +37,12 @@ window.HARBINGER_CONFIG = {
   },
 
   layout: {
-    bandHeight: "11vh",
-    // Column weights, left to right. Edit here, not in the stylesheet.
-    columns: { weather: "22fr", transit: "30fr", bikes: "14fr", news: "20fr", notices: "14fr" },
+    // Left column is what the world measures; right column is what the agent says.
+    columns: "2fr 1fr",
+    bandHeight: "10vh",
+    stripHeight: "28vh",
+    // Transit and bikes, left to right, under the strip.
+    leftBottom: "60fr 40fr",
   },
 
   timeZone: "America/New_York",

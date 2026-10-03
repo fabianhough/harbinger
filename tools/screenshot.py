@@ -55,7 +55,9 @@ def main() -> int:
             page = browser.new_page(viewport={"width": args.width, "height": args.height}, device_scale_factor=1)
             errors = []
             page.on("pageerror", lambda e: errors.append(str(e)))
-            page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+            # config.local.js is optional, so its 404 is expected.
+            page.on("console", lambda m: errors.append(m.text)
+                    if m.type == "error" and "config.local.js" not in (m.location or {}).get("url", "") else None)
             page.goto(f"http://127.0.0.1:{port}/index.html")
             page.wait_for_selector(".pane", timeout=10000)
             page.evaluate("document.fonts.ready")

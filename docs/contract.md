@@ -7,8 +7,10 @@ collectors produce most of it. An external agent writes the rest. This page is t
 contract between them and the page, written for whoever builds the agent side.
 
 The machine-readable version is `schema/state.schema.json` (JSON Schema 2020-12).
-A complete example, using placeholder locations and fictional news, is
-`web/sample/state.json`.
+A complete example is `web/sample/state.json`. It uses placeholder locations, real
+feed payloads where the recon captured them, and invented values elsewhere (the
+evening showers, the wind advisory, the news, the notices) so that every rendering
+path is exercised.
 
 ## Document
 
@@ -53,21 +55,27 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
   "updated_at": "...",
   "source": "nws",
   "verdicts": {
-    "umbrella": { "answer": "No",    "detail": "0% chance of rain through midnight" },
-    "jacket":   { "answer": "Light", "detail": "57° tonight, feels like 52° after 10pm" }
+    "umbrella": { "answer": "10pm to 1am", "detail": "Showers likely, 65% at 11pm" },
+    "jacket":   { "answer": "Light",       "detail": "57° tonight, feels like 52° after 10pm" }
   },
   "now":    { "temp_f": 71, "feels_f": 65, "short": "Sunny", "wind": "8 mph NE" },
-  "hourly": [ { "t": "...", "temp_f": 71, "pop": 0, "short": "Sunny" } ],
-  "today":  { "high_f": 71, "low_f": 57, "narrative": "Mostly sunny ..." },
-  "alerts": [ { "headline": "Wind Advisory until 6 PM", "severity": "advisory" } ]
+  "hourly": [ { "t": "...", "temp_f": 71, "pop": 0, "kind": "clear", "short": "Sunny" } ],
+  "today":  { "high_f": 71, "low_f": 55, "narrative": "Mostly sunny ..." },
+  "alerts": [ { "headline": "Wind Advisory until 10 PM", "severity": "advisory",
+                "onset": "...", "ends": "..." } ]
 }
 ```
 
 - `verdicts` are the words shown in the top band. `answer` is at most 24
-  characters; `detail` at most 80.
-- `hourly` is the next 12 hours, 24 at most. `pop` is probability of precipitation,
-  0 to 100.
-- `alerts.severity` is `advisory`, `watch` or `warning`.
+  characters; `detail` at most 80. The page labels `umbrella` as **Rain**: the
+  useful answer is *when* ("10pm to 1am", "None"), not yes or no.
+- `hourly` starts at the current hour, 24 entries at most; the page shows the first
+  18 by default. `pop` is probability of precipitation, 0 to 100. `kind` is the
+  collector's classification of the hour: `clear`, `cloudy`, `fog`, `rain`, `snow`
+  or `storm`. Rain, snow and storm hours are shaded on the strip.
+- `alerts.severity` is `advisory`, `watch` or `warning`. `onset` and `ends` are
+  optional; when present the alert is drawn across those hours of the strip,
+  otherwise across all of them.
 
 ### `transit`
 
@@ -95,7 +103,9 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
 - `N` and `S` follow the MTA's platform suffix convention. `label` is the
   destination word to display. The page emphasises one direction (configurable).
 - `arrivals_min` holds up to three values, ascending, minutes from `updated_at`.
-  Values under 1 render as "now". An empty array renders as "no trains".
+  The page drops arrivals sooner than its configured walk time (10 minutes by
+  default) before showing the rest, so send the next three regardless. Nothing
+  reachable renders as "none in reach".
 - `alerts.header` may use `[F]` bracket notation; the page renders it as a bullet.
   `scope` is `line` for line-wide alerts and `station` for ones naming this stop.
   Station-scoped alerts get the stronger treatment.
@@ -142,12 +152,15 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
 {
   "updated_at": "...",
   "priority": "normal",
-  "text": "**Homelab**\nproxmox-01 up 41 days\n\n**Friends**\nMinecraft server: offline since Thursday"
+  "headline": "Minecraft server is back online",
+  "text": "**Homelab**\nproxmox-01 up 41 days\n\n**Friends**\nMinecraft server back online as of 2pm"
 }
 ```
 
-- Free-form text, at most 1200 characters. Newlines are preserved. `**bold**` is
-  the only markup; everything else is shown literally. HTML is escaped.
+- `text` is free-form, at most 1200 characters. Newlines are preserved. `**bold**`
+  is the only markup; everything else is shown literally. HTML is escaped.
+- `headline` is optional, at most 60 characters, shown large at the top of the
+  agent column. Omit it on quiet days and the space collapses.
 - `priority: high` highlights the pane heading.
 
 ## Writing the agent slots

@@ -73,12 +73,17 @@
           "maxItems": 24,
           "items": {
             "type": "object",
-            "required": ["t", "temp_f", "pop"],
+            "required": ["t", "temp_f", "pop", "kind"],
             "additionalProperties": false,
             "properties": {
               "t": { "$ref": "#/$defs/timestamp" },
               "temp_f": { "type": "number" },
               "pop": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Probability of precipitation, percent" },
+              "kind": {
+                "type": "string",
+                "enum": ["clear", "cloudy", "fog", "rain", "snow", "storm"],
+                "description": "Collector's classification of the hour; rain, snow and storm are shaded on the strip"
+              },
               "short": { "type": "string", "maxLength": 40 }
             }
           }
@@ -101,7 +106,9 @@
             "additionalProperties": false,
             "properties": {
               "headline": { "type": "string", "maxLength": 120 },
-              "severity": { "type": "string", "enum": ["advisory", "watch", "warning"] }
+              "severity": { "type": "string", "enum": ["advisory", "watch", "warning"] },
+              "onset": { "$ref": "#/$defs/timestamp" },
+              "ends": { "$ref": "#/$defs/timestamp" }
             }
           }
         }
@@ -231,6 +238,11 @@
           "type": "string",
           "maxLength": 1200,
           "description": "Plain text. Newlines are kept. **bold** is the only markup."
+        },
+        "headline": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "One line shown large at the top of the agent column. Omit on quiet days."
         },
         "priority": { "$ref": "#/$defs/priority" }
       }
