@@ -105,10 +105,10 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
   station-wide column headers; a line's own `label` is shown small beneath its
   times only when it differs (a line that terminates short, say). The page
   emphasises one direction (configurable).
-- `arrivals_min` holds up to three values, ascending, minutes from `updated_at`.
+- `arrivals_min` holds up to six values, ascending, minutes from `updated_at`.
   The page drops arrivals sooner than its configured walk time (10 minutes by
-  default) before showing the rest, so send the next three regardless. Nothing
-  reachable renders as "none in reach".
+  default) and shows the next three that remain, which is why the collector sends
+  six. Nothing reachable renders as "none in reach".
 - `alerts.header` may use `[F]` bracket notation; the page renders it as a bullet.
   `scope` is `line` for line-wide alerts and `station` for ones naming this stop.
   Station-scoped alerts get the stronger treatment.
@@ -168,18 +168,41 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
 
 ## Writing the agent slots
 
-Planned for the server leg: the agent replaces one slot at a time with an HTTP PUT.
+The agent replaces one slot at a time with an HTTP PUT.
 
 ```
 PUT /api/slots/news
 PUT /api/slots/notices
-Authorization: Bearer <token from the server's local config>
+Authorization: Bearer <token from config.yaml or HARBINGER_AGENT_TOKEN>
 Content-Type: application/json
 ```
 
 The body is the slot object exactly as shown above. `updated_at` may be omitted;
-the server fills it with the receipt time. The server validates against the schema
-and answers `400` with the validation message on a bad body.
+the server fills it with the receipt time. Partial updates are not supported: send
+the whole slot every time. This keeps the agent stateless and makes a bad write easy
+to overwrite.
 
-Partial updates are not supported: send the whole slot every time. This keeps the
-agent stateless and makes a bad write easy to overwrite.
+Responses:
+
+| Code | Meaning |
+|---|---|
+| `204` | Stored. The next `GET /api/state` shows it. |
+| `400` | Body is not JSON, or fails the schema. `detail` names the field and the rule. |
+| `401` | No bearer token. |
+| `403` | Wrong token, or the server has no token configured. |
+| `404` | Not an agent-writable slot. Only `news` and `notices` are. |
+
+Example:
+
+```sh
+curl -X PUT http://harbinger.local:8080/api/slots/notices \
+  -H "Authorization: Bearer $HARBINGER_AGENT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "headline": "Minecraft server is back online",
+    "text": "**Friends**\nMinecraft server back online as of 2pm\n\n**Today**\nTrash goes out tonight"
+  }'
+```
+
+`GET /api/state` returns the whole document and `GET /api/health` returns the age of
+each slot in seconds, which is a quick way for the agent to confirm its write landed.

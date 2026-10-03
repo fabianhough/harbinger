@@ -4,6 +4,8 @@ Last verified: 2026-10-03
 
 ## Where
 
+Used by `harbinger/collectors/mta.py`.
+
 - Developer portal: https://new.mta.info/developers (feed list, terms, and the NYCT
   protobuf extension definition). GTFS-realtime spec: https://gtfs.org/realtime/
 - Auth: **none**. No API key, no `User-Agent` requirement observed.
@@ -133,8 +135,15 @@ trips. Per alert (trimmed):
 ```
 
 `header_text` uses `[R]` bracket notation for route bullets, which the UI can
-render as the familiar circles. `alert_type` values seen: `Delays`, plus planned
-work entries that carry `display_before_active`. `active_period.end` may be absent.
+render as the familiar circles. `alert_type` values seen: `Delays`, `Planned - Stops
+Skipped`, `Station Notice`, plus planned work entries that carry
+`display_before_active`. `active_period.end` may be absent.
+
+`informed_entity` entries may carry a `stop_id` alongside the `route_id`. These are
+**parent** stop IDs (`A41`, never `A41N`); about 1300 of the feed's entries name
+stops, mostly station notices and planned skips. An alert that names stops is about
+those stops only, so the collector keeps it only when one of the configured stops
+is among them, and then scopes it `station`.
 
 **Mapping to the dashboard question:** fetch the feeds that cover the configured
 station, collect `stop_time_update`s whose `stop_id` starts with a configured

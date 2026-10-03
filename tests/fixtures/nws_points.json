@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "gridId": "OKX",
+    "gridX": 34,
+    "gridY": 44,
+    "forecast": "https://api.weather.gov/gridpoints/OKX/34,44/forecast",
+    "forecastHourly": "https://api.weather.gov/gridpoints/OKX/34,44/forecast/hourly",
+    "forecastGridData": "https://api.weather.gov/gridpoints/OKX/34,44",
+    "timeZone": "America/New_York"
+  }
+}

@@ -1,0 +1,453 @@
+{
+  "header": {
+    "timestamp": 1791063482
+  },
+  "entity": [
+    {
+      "id": "lmm:alert:270210:26",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1791057329,
+            "end": 1791063600
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "Uptown [A] trains are running with delays after NYPD responded to an unauthorized person on the tracks near Broad Channel.",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Delays",
+          "created_at": 1791057329,
+          "updated_at": 1791062876
+        }
+      }
+    },
+    {
+      "id": "lmm:alert:270216:26",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1791058966
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "[F] trains are running with delays while we perform track maintenance along the line in Brooklyn.",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Delays",
+          "created_at": 1791058966,
+          "updated_at": 1791058966
+        }
+      }
+    },
+    {
+      "id": "lmm:alert:270223:26",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1791063482
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "Downtown [E][F] trains are running with delays while we perform track maintenance in Queens.",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Delays",
+          "created_at": 1791063482,
+          "updated_at": 1791063482
+        }
+      }
+    },
+    {
+      "id": "lmm:planned_work:35278",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1791252000,
+            "end": 1791280800
+          },
+          {
+            "start": 1791338400,
+            "end": 1791367200
+          },
+          {
+            "start": 1791943200,
+            "end": 1791972000
+          },
+          {
+            "start": 1792029600,
+            "end": 1792058400
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "H01"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "H02"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "H03"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "A59"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "A60"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "A61"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "A55"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "A57"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "G06"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "G05"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "G07"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "J14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "J13"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "A",
+            "stop_id": "J12"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "H01"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "H02"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "H03"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "A59"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "A60"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "A61"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "A55"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "A57"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "G06"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "G05"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "G07"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "J14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "J13"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "J12"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "H01"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "H02"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "H03"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "A59"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "A60"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "A61"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "A55"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "A57"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "G06"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "G05"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "G07"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "J14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "J13"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "J",
+            "stop_id": "J12"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "[airplane icon] JFK AirTrain service is suspended and replaced by free shuttle buses",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Station Notice",
+          "created_at": 1790865231,
+          "updated_at": 1790965123
+        }
+      }
+    },
+    {
+      "id": "lmm:planned_work:35126",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1790989200,
+            "end": 1791190800
+          },
+          {
+            "start": 1791594000,
+            "end": 1791795600
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "7",
+            "stop_id": "710"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "7",
+            "stop_id": "G14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "710"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "E",
+            "stop_id": "G14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F",
+            "stop_id": "710"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F",
+            "stop_id": "G14"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "R",
+            "stop_id": "710"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "R",
+            "stop_id": "G14"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "The main entrance/exit and atrium stairway at 74 St-Broadway-Roosevelt Av [E][F][R][7] Station (between Broadway and Roosevelt Av) will be temporarily closed",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Station Notice",
+          "created_at": 1790347204,
+          "updated_at": 1790961177
+        }
+      }
+    },
+    {
+      "id": "lmm:planned_work:35102",
+      "alert": {
+        "active_period": [
+          {
+            "start": 1792640700,
+            "end": 1792659600
+          }
+        ],
+        "informed_entity": [
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F",
+            "stop_id": "F04"
+          },
+          {
+            "agency_id": "MTASBWY",
+            "route_id": "F",
+            "stop_id": "F05"
+          }
+        ],
+        "header_text": {
+          "translation": [
+            {
+              "text": "In Queens, Manhattan-bound [F] skips Sutphin Blvd and Briarwood",
+              "language": "en"
+            }
+          ]
+        },
+        "transit_realtime.mercury_alert": {
+          "alert_type": "Planned - Stops Skipped",
+          "created_at": 1790338843,
+          "updated_at": 1790791267
+        }
+      }
+    }
+  ]
+}

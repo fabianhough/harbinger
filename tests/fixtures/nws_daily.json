@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "updateTime": "2026-10-03T18:19:26+00:00",
+    "periods": [
+      {
+        "name": "This Afternoon",
+        "startTime": "2026-10-03T17:00:00-04:00",
+        "endTime": "2026-10-03T18:00:00-04:00",
+        "isDaytime": true,
+        "temperature": 71,
+        "temperatureUnit": "F",
+        "shortForecast": "Mostly Sunny",
+        "detailedForecast": "Mostly sunny. High near 71, with temperatures falling to around 69 in the afternoon. East wind around 7 mph."
+      },
+      {
+        "name": "Tonight",
+        "startTime": "2026-10-03T18:00:00-04:00",
+        "endTime": "2026-10-04T06:00:00-04:00",
+        "isDaytime": false,
+        "temperature": 57,
+        "temperatureUnit": "F",
+        "shortForecast": "Partly Cloudy",
+        "detailedForecast": "Partly cloudy. Low around 57, with temperatures rising to around 59 overnight. East wind 5 to 8 mph."
+      },
+      {
+        "name": "Sunday",
+        "startTime": "2026-10-04T06:00:00-04:00",
+        "endTime": "2026-10-04T18:00:00-04:00",
+        "isDaytime": true,
+        "temperature": 66,
+        "temperatureUnit": "F",
+        "shortForecast": "Chance Rain Showers",
+        "detailedForecast": "A chance of rain showers after 11am. Mostly cloudy. High near 66, with temperatures falling to around 64 in the afternoon. East wind 7 to 10 mph. Chance of precipitation is 50%. New rainfall amounts less than a tenth of an inch possible."
+      },
+      {
+        "name": "Sunday Night",
+        "startTime": "2026-10-04T18:00:00-04:00",
+        "endTime": "2026-10-05T06:00:00-04:00",
+        "isDaytime": false,
+        "temperature": 58,
+        "temperatureUnit": "F",
+        "shortForecast": "Chance Rain Showers then Mostly Cloudy",
+        "detailedForecast": "A chance of rain showers before 11pm. Mostly cloudy, with a low around 58. North wind 2 to 7 mph. Chance of precipitation is 50%. New rainfall amounts less than a tenth of an inch possible."
+      }
+    ]
+  }
+}
