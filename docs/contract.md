@@ -144,7 +144,8 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
 }
 ```
 
-- Up to 10 items. The page shows what fits; put the most important first.
+- Up to 10 items. When they do not all fit, the page scrolls through the list
+  slowly, pausing at the top; put the most important first.
 - `title` at most 90 characters, `summary` at most 200, `source` at most 40.
 - `priority` is `low`, `normal` (default) or `high`. High items get a marker; low
   items are dimmed.

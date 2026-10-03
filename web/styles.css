@@ -531,11 +531,12 @@ h1, h2, h3, p { margin: 0; font-weight: inherit; }
 }
 
 .news-list {
+  position: relative;          /* children's offsetTop is relative to the list */
   display: flex;
   flex-direction: column;
   gap: calc(var(--gap) * 0.8);
   min-height: 0;
-  overflow: hidden;
+  overflow: hidden;            /* scrolled by script, never by a scrollbar */
 }
 
 .news-item {

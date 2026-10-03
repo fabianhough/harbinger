@@ -289,12 +289,8 @@
     return paneShell("news", "News", `<div class="news-list">${items}</div>`, nw.updated_at);
   }
 
-  // Nothing on the board is allowed to clip mid-line. News drops trailing items
-  // that do not fit; notices clamps to whole lines.
+  // Nothing on the board is allowed to clip mid-line: notices clamps to whole lines.
   function fitText() {
-    document.querySelectorAll(".news-list").forEach((list) => {
-      while (list.scrollHeight > list.clientHeight && list.children.length > 1) list.lastElementChild.remove();
-    });
     document.querySelectorAll(".notices-text").forEach((el) => {
       const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
       const lines = Math.max(1, Math.floor(el.clientHeight / lineHeight));
@@ -306,7 +302,37 @@
     });
   }
 
+  // News that does not fit scrolls: pause at the top, step one item at a time,
+  // pause at the bottom, return to the top. The list is re-queried on every step
+  // because the pane is re-rendered on each poll.
+  const newsScroll = { index: 0, timer: null };
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function scheduleNewsScroll(reset) {
+    clearTimeout(newsScroll.timer);
+    if (reset) newsScroll.index = 0;
+    const list = document.querySelector(".news-list");
+    if (!list || list.scrollHeight <= list.clientHeight + 1) return;
+    const atEnd = list.scrollTop + list.clientHeight >= list.scrollHeight - 1;
+    const delay = newsScroll.index === 0 || atEnd ? C.newsScroll.pauseMs : C.newsScroll.stepMs;
+    newsScroll.timer = setTimeout(() => {
+      const l = document.querySelector(".news-list");
+      if (!l) return;
+      const items = [...l.children];
+      if (l.scrollTop + l.clientHeight >= l.scrollHeight - 1 || newsScroll.index >= items.length - 1) {
+        newsScroll.index = 0;
+        l.scrollTo({ top: 0, behavior: "auto" });
+      } else {
+        newsScroll.index += 1;
+        l.scrollTo({ top: items[newsScroll.index].offsetTop, behavior: reducedMotion ? "auto" : "smooth" });
+      }
+      scheduleNewsScroll(false);
+    }, delay);
+  }
+
   // ---------- orchestration ----------
+
+  let lastNewsJson = null;
 
   function applyLayout() {
     const root = document.documentElement.style;
@@ -324,8 +350,18 @@
     const headline = renderHeadline(s.notices);
     const told = $("told");
     told.classList.toggle("no-headline", !headline);
+    // Re-rendering must not reset a scrolling news list unless the news changed.
+    const newsJson = JSON.stringify(s.news?.items ?? null);
+    const newsChanged = newsJson !== lastNewsJson;
+    lastNewsJson = newsJson;
+    const prevTop = document.querySelector(".news-list")?.scrollTop ?? 0;
     told.innerHTML = headline + renderNotices(s.notices) + renderNews(s.news);
+    if (!newsChanged) {
+      const list = document.querySelector(".news-list");
+      if (list) list.scrollTop = prevTop;
+    }
     fitText();
+    scheduleNewsScroll(newsChanged);
     $("board").classList.toggle("offline", lastFetchOk === false);
   }
 
