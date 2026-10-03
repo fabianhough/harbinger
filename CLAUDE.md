@@ -68,6 +68,9 @@ placeholders instead.
 
 ## Open
 
-- UI design (goal 2) is next. Data-source recon (goal 3, first pass) is done.
+- The state contract (`schema/`, `docs/contract.md`) and a static mock (`web/`)
+  exist. `uv run tools/screenshot.py` renders the mock at kiosk resolution and
+  fails on overflow. The server leg (collectors, state endpoint, agent write
+  endpoint) is next, once the mock has been reviewed.
 - Whether any rule above needs harness enforcement via `.claude/settings.json`
   hooks or permissions, rather than guidance here.
