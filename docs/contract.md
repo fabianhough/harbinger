@@ -105,10 +105,10 @@ amber). Past three times the budget it is **dead** (faded, age shown in red).
   station-wide column headers; a line's own `label` is shown small beneath its
   times only when it differs (a line that terminates short, say). The page
   emphasises one direction (configurable).
-- `arrivals_min` holds up to three values, ascending, minutes from `updated_at`.
+- `arrivals_min` holds up to six values, ascending, minutes from `updated_at`.
   The page drops arrivals sooner than its configured walk time (10 minutes by
-  default) before showing the rest, so send the next three regardless. Nothing
-  reachable renders as "none in reach".
+  default) and shows the next three that remain, which is why the collector sends
+  six. Nothing reachable renders as "none in reach".
 - `alerts.header` may use `[F]` bracket notation; the page renders it as a bullet.
   `scope` is `line` for line-wide alerts and `station` for ones naming this stop.
   Station-scoped alerts get the stronger treatment.

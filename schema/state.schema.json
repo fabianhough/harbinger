@@ -181,9 +181,9 @@
         "label": { "type": "string", "maxLength": 24, "description": "Destination word, e.g. Manhattan" },
         "arrivals_min": {
           "type": "array",
-          "maxItems": 3,
+          "maxItems": 6,
           "items": { "type": "number", "minimum": -2 },
-          "description": "Minutes until arrival, ascending; empty when nothing is scheduled"
+          "description": "Minutes until arrival, ascending, up to six; the page drops the unreachable ones and shows three"
         }
       }
     },

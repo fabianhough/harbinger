@@ -72,10 +72,10 @@ placeholders instead.
 
 ## Open
 
-- The page (`web/`) and its contract (`schema/`, `docs/contract.md`) are merged.
-  The server (`harbinger/`, FastAPI) holds the state, serves the page, and takes
-  the agent's PUTs; `uv run harbinger serve`, `uv run pytest`. No collectors yet:
-  that is the next leg (Citi Bike, then NWS with the verdict logic, then MTA),
-  followed by Pi deployment (systemd, kiosk Chromium).
+- The page (`web/`), its contract (`schema/`, `docs/contract.md`), the server
+  (`harbinger/`, FastAPI) and the three collectors (`harbinger/collectors/`) exist.
+  `uv run harbinger serve` runs everything; `uv run harbinger collect <name>` runs
+  one collector for debugging; `uv run pytest`. Next: Pi deployment (systemd units
+  for the server and kiosk Chromium, local config, first-run notes).
 - Whether any rule above needs harness enforcement via `.claude/settings.json`
   hooks or permissions, rather than guidance here.
