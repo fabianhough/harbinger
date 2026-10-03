@@ -1,0 +1,13 @@
+.git
+.venv
+.pytest_cache
+__pycache__
+var
+config.yaml
+.env
+docs
+tests
+tools
+web/config.local.js
+*.png
+*.md

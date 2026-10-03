@@ -1,7 +1,8 @@
 # Harbinger
 
-A front-entrance dashboard. One glanceable page on an ultrawide 2560x1080 monitor,
-served from a Raspberry Pi 4, that foreshadows the day: transit, weather, bikes, news.
+A front-entrance dashboard. One glanceable page on an ultrawide 2560x1080 monitor
+that foreshadows the day: transit, weather, bikes, news. The server runs as a
+container on any host; the display is any browser pointed at it.
 
 ## How we work together
 
@@ -51,8 +52,10 @@ The core rule: **don't assume, ask.** Fabian is always available.
 
 ## Project decisions so far
 
-- Everything runs on the Pi 4: collectors, storage, agent-facing API, and Chromium
-  in kiosk mode. Pi 5 is in reserve.
+- The server (collectors, state, agent API) runs as one container on any Docker
+  host, built on the host from the repo (`make up`); updates are manual for now.
+  The display is any browser at the server's URL. Nothing is host-specific and no
+  host setup lives in this repository.
 - Python backend. Plain HTML/CSS/JS front end. No framework unless there is a
   concrete reason.
 - Two content classes: deterministic collectors (MTA GTFS-realtime, NWS weather,
@@ -72,12 +75,10 @@ placeholders instead.
 
 ## Open
 
-- The page (`web/`), its contract (`schema/`, `docs/contract.md`), the server
-  (`harbinger/`, FastAPI) and the three collectors (`harbinger/collectors/`) exist.
-  `uv run harbinger serve` runs everything; `uv run harbinger collect <name>` runs
-  one collector for debugging; `uv run pytest`. Next: repo cleanup and generic
-  deployment tooling. Harbinger runs anywhere with Python, a browser, internet
-  access and a reachable port; nothing is Pi-specific, and no host setup belongs
-  in this repository.
-- Whether any rule above needs harness enforcement via `.claude/settings.json`
-  hooks or permissions, rather than guidance here.
+- Everything exists: page (`web/`), contract (`schema/`, `docs/contract.md`),
+  server and collectors (`harbinger/`), deployment (`Dockerfile`, `compose.yaml`,
+  `Makefile`). `make test`, `make screenshot`, `make up`.
+- Not yet done: a run on a real host with real config, and a real agent writing
+  the `news` and `notices` slots. Both are Fabian's to start.
+- Decided: the rules in this file are guidance, not harness-enforced hooks. Three
+  legs went by without a rule being broken; revisit only if one is.
